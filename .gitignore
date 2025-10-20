@@ -44,7 +44,7 @@ app.*.map.json
 /android/app/release
 
 # Web related
-/build/web/
+# /build/web/  # Commented out so we can commit built files for Netlify
 
 # Exceptions to above rules.
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages

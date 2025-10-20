@@ -19,7 +19,7 @@
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="Telegram Rewards Mini App">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
@@ -33,33 +33,74 @@
   <!-- Telegram Web App Script -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1437274793051860"
-     crossorigin="anonymous"></script>
-
-  <!-- Additional Monetization Script -->
-  <script type='text/javascript' src='//pl27892387.effectivegatecpm.com/d0/5c/fd/d05cfd574b48d5b87ac9275d14f50d8f.js'></script>
-
-  <!-- Monetization Script -->
-  <script src='//libtl.com/sdk.js' data-zone='10069386' data-sdk='show_10069386'></script>
-
-  <!-- Rewarded Ad Function -->
-  <script>
-    function showRewardedAd() {
-      show_10069386().then(() => {
-        // User watched the ad - give reward
-        alert('You have seen an ad!');
-        // You can add more reward logic here
-      }).catch((error) => {
-        console.log('Ad failed to show:', error);
-      });
+  <!-- CSS Fix for Scroll Issues -->
+  <style>
+    html, body {
+      overflow-x: hidden;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-y;
     }
-  </script>
+    
+    body {
+      margin: 0;
+      padding: 0;
+      position: relative;
+    }
+    
+    /* Prevent ads from interfering with scroll */
+    iframe[src*="ads"], 
+    div[class*="ad"], 
+    script[src*="ads"] {
+      pointer-events: none;
+    }
+  </style>
 
   <title>Rewards App</title>
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>
+  
+  <!-- Monetization Scripts - Moved to end of body -->
+  <script>
+    // Load monetization scripts after page load
+    window.addEventListener('load', function() {
+      // Google AdSense
+      var adsenseScript = document.createElement('script');
+      adsenseScript.async = true;
+      adsenseScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1437274793051860';
+      adsenseScript.crossOrigin = 'anonymous';
+      document.head.appendChild(adsenseScript);
+      
+      // Additional Monetization Script
+      var effectiveGateScript = document.createElement('script');
+      effectiveGateScript.type = 'text/javascript';
+      effectiveGateScript.src = '//pl27892387.effectivegatecpm.com/d0/5c/fd/d05cfd574b48d5b87ac9275d14f50d8f.js';
+      document.head.appendChild(effectiveGateScript);
+      
+      // LibTL Monetization Script
+      var libtlScript = document.createElement('script');
+      libtlScript.src = '//libtl.com/sdk.js';
+      libtlScript.setAttribute('data-zone', '10069386');
+      libtlScript.setAttribute('data-sdk', 'show_10069386');
+      document.head.appendChild(libtlScript);
+    });
+    
+    // Rewarded Ad Function
+    function showRewardedAd() {
+      if (typeof show_10069386 !== 'undefined') {
+        show_10069386().then(() => {
+          // User watched the ad - give reward
+          alert('You have seen an ad!');
+          // You can add more reward logic here
+        }).catch((error) => {
+          console.log('Ad failed to show:', error);
+        });
+      } else {
+        console.log('Ad script not loaded yet');
+      }
+    }
+  </script>
 </body>
 </html>

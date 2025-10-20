@@ -136,6 +136,14 @@ class TelegramService {
     }
   }
 
+  void showRewardedAd() {
+    try {
+      js.context.callMethod('eval', ['showRewardedAd();']);
+    } catch (e) {
+      print('Error showing rewarded ad: $e');
+    }
+  }
+
   Map<String, dynamic> getThemeParams() {
     if (!isAvailable) return {};
     try {

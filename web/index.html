@@ -36,6 +36,19 @@
   <!-- Monetization Script -->
   <script src='//libtl.com/sdk.js' data-zone='10069386' data-sdk='show_10069386'></script>
 
+  <!-- Rewarded Ad Function -->
+  <script>
+    function showRewardedAd() {
+      show_10069386().then(() => {
+        // User watched the ad - give reward
+        alert('You have seen an ad!');
+        // You can add more reward logic here
+      }).catch((error) => {
+        console.log('Ad failed to show:', error);
+      });
+    }
+  </script>
+
   <title>Rewards App</title>
   <link rel="manifest" href="manifest.json">
 </head>

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_state.dart';
 import '../models/task_model.dart';
+import '../services/telegram_service.dart';
 import '../widgets/user_header.dart';
 import '../widgets/task_card.dart';
 import '../widgets/stats_card.dart';
@@ -98,6 +99,34 @@ class HomeScreen extends StatelessWidget {
                     .toList(),
 
                 const SizedBox(height: 20),
+
+                // Watch Ad Button
+                Container(
+                  width: double.infinity,
+                  margin: const EdgeInsets.only(bottom: 20),
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      final telegramService = TelegramService();
+                      telegramService.showRewardedAd();
+                    },
+                    icon: const Icon(Icons.play_circle_outline),
+                    label: const Text(
+                      '🎬 Watch Ad for Bonus Coins',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.orange,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                ),
 
                 // Special Tasks
                 const Text(
